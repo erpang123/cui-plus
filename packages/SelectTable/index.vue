@@ -31,6 +31,12 @@ const props = defineProps({
     default () {
       return []
     }
+  },
+  customFun: {
+    type: Function,
+    default () {
+      return () => {}
+    }
   }
 })
 
@@ -79,9 +85,9 @@ watch(
     const arr = attrs.data as any[] || [];
     let lists: any[] = []
     if (multipleTable.value) {
-      arr.forEach(el => {
-        const index = newVal.findIndex(nv => nv.id === el.id)
-        if (index >= 0) {
+      arr.forEach((el, i) => {
+        const bool = props.customFun ? props.customFun (el, i) : newVal.findIndex(nv => nv.id === el.id) >= 0
+        if (bool) {
           lists.push(el)
           multipleTable.value.toggleRowSelection(el, true);
         } else {
@@ -90,8 +96,6 @@ watch(
       })
       data.selectTableLists = lists
     }
-  }, {
-    immediate: true
   }
 )
 </script>

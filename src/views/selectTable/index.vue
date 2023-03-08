@@ -4,6 +4,7 @@
     :selectLists="data.selectTableLists"
     tooltip-effect="dark"
     style="width: 100%"
+    :customFun="customFun"
     @finish="finishEvent"
   >
     <template v-slot:default>
@@ -107,6 +108,10 @@ const sureLists = () => {
 // 清空数据列表
 const clearShowLists = () => {
   data.selectTableLists = []
+}
+
+const customFun = (el, i) => {
+  return i === 2
 }
 
 onMounted(() => {
