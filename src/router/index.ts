@@ -11,6 +11,11 @@ const routes = [
     name: 'dropTable',
     component: () => import('@/views/drop/index.md')
   },
+  {
+    path: '/selectTable',
+    name: 'selectTable',
+    component: () => import('@/views/selectTable/index.md')
+  },
 ]
 
 const router = createRouter({
